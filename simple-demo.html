@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎤 KPop Trainee Manager - Simple Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .app-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7F8C8D;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .demo-info {
+            background: #E8F4FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+        
+        .demo-account {
+            color: #34495E;
+            margin-bottom: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .nav-link {
+            display: block;
+            width: 100%;
+            background: #3498DB;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 15px;
+            transition: background 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link:active {
+            background: #2980B9;
+            color: white;
+        }
+        
+        .features {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .features-title {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        
+        .feature-item {
+            color: #34495E;
+            margin-bottom: 8px;
+            padding-left: 10px;
+            font-size: 14px;
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .screen:target {
+            display: block;
+        }
+        
+        .portfolio-stats {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .stat-text {
+            color: #2C3E50;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .holding-card {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .holding-name {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 5px;
+        }
+        
+        .holding-value {
+            color: #27AE60;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .positive {
+            color: #27AE60;
+        }
+        
+        .negative {
+            color: #E74C3C;
+        }
+        
+        .back-link {
+            background: #95A5A6;
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .back-link:hover {
+            background: #7F8C8D;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="home" class="container">
+        <h1 class="app-title">🎤 KPop Trainee Manager</h1>
+        <p class="subtitle">Demo Version - Full Feature Preview</p>
+        
+        <div class="demo-info">
+            <div class="demo-title">📋 Demo Features Available:</div>
+            <div class="demo-account">• Virtual Trainee Investment Platform</div>
+            <div class="demo-account">• Portfolio Management System</div>
+            <div class="demo-account">• Trading & Market Analysis</div>
+            <div class="demo-account">• Social Features & AI Chat</div>
+        </div>
+        
+        <a href="#portfolio" class="nav-link">💼 View Portfolio</a>
+        <a href="#trainees" class="nav-link">🌟 Browse Trainees</a>
+        <a href="#trading" class="nav-link">📈 Trading Interface</a>
+        <a href="#social" class="nav-link">🎭 Social & AI Features</a>
+        
+        <div class="features">
+            <div class="features-title">✨ Demo Account Data:</div>
+            <div class="feature-item">• Balance: $10,000</div>
+            <div class="feature-item">• Holdings: 3 trainees</div>
+            <div class="feature-item">• Portfolio Value: $4,399</div>
+            <div class="feature-item">• Today's Change: +$234 (+5.6%)</div>
+        </div>
+    </div>
+    
+    <!-- Portfolio Screen -->
+    <div id="portfolio" class="container screen">
+        <h2 class="app-title">💼 My Portfolio</h2>
+        
+        <div class="portfolio-stats">
+            <div class="stat-text">Total Value: $4,399</div>
+            <div class="stat-text">Today's Change: +$234 (+5.6%)</div>
+            <div class="stat-text">Holdings: 3 trainees</div>
+            <div class="stat-text">Available Balance: $10,000</div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Luna Kim</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">15% ownership</div>
+            <div class="holding-value">Value: $1,875</div>
+            <div class="positive" style="font-weight: 500;">+$125 (+7.1%)</div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Alex Park</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">8% ownership</div>
+            <div class="holding-value">Value: $784</div>
+            <div class="negative" style="font-weight: 500;">-$45 (-5.4%)</div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Mia Chen</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">12% ownership</div>
+            <div class="holding-value">Value: $1,740</div>
+            <div class="positive" style="font-weight: 500;">+$89 (+5.4%)</div>
+        </div>
+        
+        <a href="#home" class="back-link">← Back to Home</a>
+    </div>
+    
+    <!-- Trainees Screen -->
+    <div id="trainees" class="container screen">
+        <h2 class="app-title">🌟 Available Trainees</h2>
+        
+        <div class="holding-card">
+            <div class="holding-name">Luna Kim</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">StarLight Entertainment</div>
+            <div class="holding-value">Current Value: $1,250</div>
+            <div style="margin: 10px 0; font-size: 12px; color: #34495E;">
+                Vocal: 85/100 | Dance: 92/100 | Rap: 78/100
+            </div>
+            <div style="font-size: 12px; color: #7F8C8D;">
+                Rising star with exceptional dance skills and growing fanbase
+            </div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Alex Park</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">Dream Factory</div>
+            <div class="holding-value">Current Value: $980</div>
+            <div style="margin: 10px 0; font-size: 12px; color: #34495E;">
+                Vocal: 78/100 | Dance: 88/100 | Rap: 95/100
+            </div>
+            <div style="font-size: 12px; color: #7F8C8D;">
+                Talented rapper with strong stage presence and charisma
+            </div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Kai Johnson</div>
+            <div style="color: #7F8C8D; margin-bottom: 5px;">Stellar Music</div>
+            <div class="holding-value">Current Value: $825</div>
+            <div style="margin: 10px 0; font-size: 12px; color: #34495E;">
+                Vocal: 90/100 | Dance: 85/100 | Rap: 70/100
+            </div>
+            <div style="font-size: 12px; color: #7F8C8D;">
+                Exceptional vocalist with international appeal potential
+            </div>
+        </div>
+        
+        <a href="#home" class="back-link">← Back to Home</a>
+    </div>
+    
+    <!-- Trading Screen -->
+    <div id="trading" class="container screen">
+        <h2 class="app-title">📈 Trading Interface</h2>
+        
+        <div class="portfolio-stats">
+            <div class="stat-text">🔥 Hot Trainees Today:</div>
+            <div class="stat-text positive">• Luna Kim: +7.1% ($1,250)</div>
+            <div class="stat-text positive">• Mia Chen: +5.4% ($1,450)</div>
+            <div class="stat-text positive">• Kai Johnson: +13.0% ($825)</div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Market Summary</div>
+            <div style="margin: 10px 0;">
+                <div class="positive">📈 Rising: 12 trainees</div>
+                <div class="negative">📉 Falling: 8 trainees</div>
+                <div style="color: #34495E;">💰 Total Market Cap: $2.4M</div>
+                <div style="color: #34495E;">📊 24h Volume: $156K</div>
+            </div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">Trading Features</div>
+            <div style="margin: 10px 0; font-size: 14px;">
+                <div>• Real-time price updates</div>
+                <div>• Market depth analysis</div>
+                <div>• Performance tracking</div>
+                <div>• Risk management tools</div>
+            </div>
+        </div>
+        
+        <a href="#home" class="back-link">← Back to Home</a>
+    </div>
+    
+    <!-- Social Screen -->
+    <div id="social" class="container screen">
+        <h2 class="app-title">🎭 Social & AI Features</h2>
+        
+        <div class="holding-card">
+            <div class="holding-name">💬 AI Persona Chat</div>
+            <div style="color: #7F8C8D; margin: 10px 0; font-size: 14px;">
+                Chat with AI versions of your invested trainees. Each AI has unique personality traits based on their profiles and training data.
+            </div>
+            <div style="font-size: 12px; color: #34495E;">
+                Available: Luna Kim AI, Alex Park AI, Mia Chen AI
+            </div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">🏆 Leaderboards</div>
+            <div style="margin: 10px 0; font-size: 14px;">
+                <div>1. InvestorPro - $45,230 (+12.5%)</div>
+                <div>2. DemoInvestor - $32,180 (+8.9%)</div>
+                <div>3. TraineeHunter - $28,950 (+7.2%)</div>
+                <div>4. KPopFan2024 - $24,100 (+6.1%)</div>
+            </div>
+        </div>
+        
+        <div class="holding-card">
+            <div class="holding-name">🎁 Gift System</div>
+            <div style="color: #7F8C8D; margin: 10px 0; font-size: 14px;">
+                Send virtual gifts to boost trainee morale or real gifts (up to $100) to show support for your favorite trainees.
+            </div>
+            <div style="font-size: 12px; color: #34495E;">
+                Virtual gifts: Flowers, Coffee, Fan letters<br>
+                Real gifts: Care packages, Equipment, Studio time
+            </div>
+        </div>
+        
+        <a href="#home" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>

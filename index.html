@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎤 KPop Trainee Manager - Complete Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .app-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7F8C8D;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .demo-info {
+            background: #E8F4FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .demo-title {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+        
+        .demo-account {
+            color: #34495E;
+            margin-bottom: 5px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .button {
+            width: 100%;
+            background: #3498DB;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .button:hover, .button:active {
+            background: #2980B9;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .button.green {
+            background: #27AE60;
+        }
+        
+        .button.green:hover {
+            background: #229954;
+        }
+        
+        .button.purple {
+            background: #9B59B6;
+        }
+        
+        .button.purple:hover {
+            background: #8E44AD;
+        }
+        
+        .button.red {
+            background: #E74C3C;
+        }
+        
+        .button.red:hover {
+            background: #C0392B;
+        }
+        
+        .button.small {
+            padding: 8px 12px;
+            font-size: 12px;
+            width: auto;
+            margin: 5px;
+        }
+        
+        .screen {
+            display: none;
+        }
+        
+        .screen.active {
+            display: block;
+        }
+        
+        .user-header {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .welcome-text {
+            font-weight: bold;
+            color: #2C3E50;
+            font-size: 14px;
+        }
+        
+        .balance-text {
+            color: #27AE60;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .portfolio-stats {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .stat-text {
+            color: #2C3E50;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .holding-card {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .holding-card:hover {
+            background: #E8F4FD;
+            transform: translateY(-2px);
+        }
+        
+        .holding-name {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 5px;
+        }
+        
+        .holding-value {
+            color: #27AE60;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .positive {
+            color: #27AE60;
+        }
+        
+        .negative {
+            color: #E74C3C;
+        }
+        
+        .trainee-detail {
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .trainee-photo {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+        
+        .detail-section {
+            margin-bottom: 20px;
+        }
+        
+        .detail-title {
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .detail-text {
+            color: #34495E;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .skill-name {
+            font-size: 12px;
+            color: #7F8C8D;
+            margin-bottom: 5px;
+        }
+        
+        .skill-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        
+        .timeline-item {
+            border-left: 3px solid #3498DB;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-date {
+            font-size: 12px;
+            color: #7F8C8D;
+            font-weight: bold;
+        }
+        
+        .timeline-event {
+            color: #2C3E50;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+        
+        .select-dropdown {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .quantity-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .trainee-option {
+            background: #F8F9FA;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        
+        .trainee-option:hover {
+            background: #E8F4FD;
+            transform: translateY(-2px);
+        }
+        
+        .trainee-option.selected {
+            background: #3498DB;
+            color: white;
+        }
+        
+        .modal-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="container screen active">
+        <h1 class="app-title">🎤 KPop Trainee Manager</h1>
+        <p class="subtitle">Complete Demo - Login Required</p>
+        
+        <div class="demo-info">
+            <div class="demo-title">📋 Demo Accounts Available:</div>
+            <div class="demo-account">• demo@kpoptrainee.com / demo123</div>
+            <div class="demo-account">• investor@test.com / test123</div>
+            <div class="demo-account">• premium@kpop.com / premium123</div>
+        </div>
+        
+        <div class="login-form">
+            <input type="email" class="input" id="email" placeholder="Email" value="demo@kpoptrainee.com">
+            <input type="password" class="input" id="password" placeholder="Password" value="demo123">
+            <button class="button" onclick="login()">Login to Demo</button>
+            <button class="button green" onclick="quickLogin()">🚀 Quick Demo Login</button>
+        </div>
+    </div>
+    
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="container screen">
+        <div class="user-header">
+            <div>
+                <div class="welcome-text">Welcome, <span id="username"></span>! 👋</div>
+                <div class="balance-text">Balance: $<span id="balance"></span></div>
+            </div>
+            <button class="button small red" onclick="logout()">Logout</button>
+        </div>
+        
+        <div id="homeScreen" class="screen active">
+            <h1 class="app-title">🎤 KPop Trainee Manager</h1>
+            <p class="subtitle">Your Virtual Trainee Investment Platform</p>
+            
+            <button class="button" onclick="showScreen('portfolioScreen')">💼 My Portfolio</button>
+            <button class="button" onclick="showScreen('traineesScreen')">🌟 Browse Trainees</button>
+            <button class="button" onclick="showScreen('tradingScreen')">📈 Trading Interface</button>
+            <button class="button purple" onclick="showScreen('socialScreen')">🎭 Social & AI Chat</button>
+        </div>
+        
+        <div id="portfolioScreen" class="screen">
+            <h2 class="app-title">💼 My Portfolio</h2>
+            
+            <div class="portfolio-stats">
+                <div class="stat-text">Total Value: $<span id="totalValue"></span></div>
+                <div class="stat-text">Today's Change: +$234 (+5.6%)</div>
+                <div class="stat-text">Holdings: <span id="holdingsCount"></span> trainees</div>
+                <div class="stat-text">Available Balance: $<span id="availableBalance"></span></div>
+            </div>
+            
+            <div id="holdings"></div>
+            
+            <button class="button" onclick="showScreen('homeScreen')">← Back to Home</button>
+        </div>
+        
+        <div id="traineesScreen" class="screen">
+            <h2 class="app-title">🌟 Available Trainees</h2>
+            
+            <div id="traineesList"></div>
+            
+            <button class="button" onclick="showScreen('homeScreen')">← Back to Home</button>
+        </div>
+        
+        <div id="traineeDetailScreen" class="screen">
+            <div id="traineeDetailContent" class="trainee-detail"></div>
+            <button class="button" onclick="showScreen('traineesScreen')">← Back to Trainees</button>
+        </div>
+        
+        <div id="tradingScreen" class="screen">
+            <h2 class="app-title">📈 Trading Interface</h2>
+            
+            <div class="portfolio-stats">
+                <div class="stat-text">🔥 Hot Trainees Today:</div>
+                <div class="stat-text positive">• Luna Kim: +7.1% ($1,250)</div>
+                <div class="stat-text positive">• Mia Chen: +5.4% ($1,450)</div>
+                <div class="stat-text positive">• Kai Johnson: +13.0% ($825)</div>
+            </div>
+            
+            <div class="holding-card">
+                <div class="holding-name">Market Summary</div>
+                <div style="margin: 10px 0;">
+                    <div class="positive">📈 Rising: 12 trainees</div>
+                    <div class="negative">📉 Falling: 8 trainees</div>
+                    <div style="color: #34495E;">💰 Total Market Cap: $2.4M</div>
+                    <div style="color: #34495E;">📊 24h Volume: $156K</div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="button green" onclick="showTradeModal('buy')">💰 Buy Shares</button>
+                <button class="button red" onclick="showTradeModal('sell')">💸 Sell Shares</button>
+            </div>
+            
+            <button class="button" onclick="showScreen('homeScreen')">← Back to Home</button>
+        </div>
+        
+        <div id="socialScreen" class="screen">
+            <h2 class="app-title">🎭 Social & AI Features</h2>
+            
+            <div class="holding-card" onclick="showAIChatModal()">
+                <div class="holding-name">💬 AI Persona Chat</div>
+                <div style="color: #7F8C8D; margin: 10px 0; font-size: 14px;">
+                    Chat with AI versions of your invested trainees. Each AI has unique personality traits.
+                </div>
+                <button class="button purple" style="margin: 0;">Choose Trainee to Chat</button>
+            </div>
+            
+            <div class="holding-card">
+                <div class="holding-name">🏆 Leaderboards</div>
+                <div style="margin: 10px 0; font-size: 14px;">
+                    <div>1. InvestorPro - $45,230 (+12.5%)</div>
+                    <div>2. <span id="leaderboardUser"></span> - $32,180 (+8.9%)</div>
+                    <div>3. TraineeHunter - $28,950 (+7.2%)</div>
+                    <div>4. KPopFan2024 - $24,100 (+6.1%)</div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="button purple" onclick="showGiftModal()">🎁 Send Gift</button>
+                <button class="button green" onclick="showFanClubModal()">👥 Join Fan Club</button>
+            </div>
+            
+            <button class="button" onclick="showScreen('homeScreen')">← Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Trading Modal -->
+    <div id="tradeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title" id="tradeModalTitle">💰 Buy Shares</div>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; color: #2C3E50; margin-bottom: 5px; display: block;">Select Trainee:</label>
+                <select id="tradeTraineeSelect" class="select-dropdown">
+                    <option value="">Choose a trainee...</option>
+                </select>
+            </div>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; color: #2C3E50; margin-bottom: 5px; display: block;">Number of Shares:</label>
+                <input type="number" id="tradeQuantity" class="quantity-input" placeholder="Enter quantity" min="1" max="100" value="10">
+            </div>
+            
+            <div id="tradePreview" style="background: #F8F9FA; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left; display: none;">
+                <div style="font-weight: bold; margin-bottom: 5px;">Trade Preview:</div>
+                <div id="tradePreviewText"></div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="button" onclick="closeModal('tradeModal')">Cancel</button>
+                <button class="button green" id="confirmTradeBtn" onclick="confirmTrade()">Confirm Trade</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chat Modal -->
+    <div id="aiChatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">💬 Choose AI Trainee to Chat</div>
+            
+            <div id="aiTraineeOptions"></div>
+            
+            <div class="modal-buttons">
+                <button class="button" onclick="closeModal('aiChatModal')">Cancel</button>
+                <button class="button purple" id="startChatBtn" onclick="startSelectedAIChat()" disabled>Start Chat</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gift Modal -->
+    <div id="giftModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">🎁 Send Gift to Trainee</div>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; color: #2C3E50; margin-bottom: 5px; display: block;">Select Trainee:</label>
+                <select id="giftTraineeSelect" class="select-dropdown">
+                    <option value="">Choose a trainee...</option>
+                </select>
+            </div>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; color: #2C3E50; margin-bottom: 5px; display: block;">Gift Type:</label>
+                <select id="giftTypeSelect" class="select-dropdown">
+                    <option value="flowers">🌸 Virtual Flowers ($5)</option>
+                    <option value="coffee">☕ Coffee & Snacks ($15)</option>
+                    <option value="fanmail">💌 Fan Letter ($10)</option>
+                    <option value="equipment">🎤 Practice Equipment ($50)</option>
+                    <option value="care-package">📦 Care Package ($100)</option>
+                </select>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="button" onclick="closeModal('giftModal')">Cancel</button>
+                <button class="button purple" onclick="confirmGift()">Send Gift</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fan Club Modal -->
+    <div id="fanClubModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">👥 Join Fan Club</div>
+            
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-weight: bold; color: #2C3E50; margin-bottom: 5px; display: block;">Select Trainee:</label>
+                <select id="fanClubTraineeSelect" class="select-dropdown">
+                    <option value="">Choose a trainee...</option>
+                </select>
+            </div>
+            
+            <div style="background: #E8F4FD; padding: 15px; border-radius: 10px; margin-bottom: 15px; text-align: left;">
+                <div style="font-weight: bold; margin-bottom: 5px;">Fan Club Benefits:</div>
+                <div style="font-size: 12px; color: #34495E;">
+                    • Exclusive content and updates<br>
+                    • Direct messaging with trainee<br>
+                    • Early access to events<br>
+                    • Special fan club merchandise<br>
+                    • Monthly video calls
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="button" onclick="closeModal('fanClubModal')">Cancel</button>
+                <button class="button green" onclick="confirmFanClub()">Join Club ($20/month)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const demoAccounts = [
+            {
+                email: 'demo@kpoptrainee.com',
+                username: 'DemoInvestor',
+                password: 'demo123',
+                balance: 10000,
+                portfolio: [
+                    { name: 'Luna Kim', shares: 15, value: 1875, change: 125, changePercent: 7.1 },
+                    { name: 'Alex Park', shares: 8, value: 784, change: -45, changePercent: -5.4 },
+                    { name: 'Mia Chen', shares: 12, value: 1740, change: 89, changePercent: 5.4 }
+                ]
+            },
+            {
+                email: 'investor@test.com',
+                username: 'TestTrader',
+                password: 'test123',
+                balance: 25000,
+                portfolio: [
+                    { name: 'Jay Lee', shares: 20, value: 2200, change: 65, changePercent: 3.0 },
+                    { name: 'Sofia Martinez', shares: 10, value: 890, change: -28, changePercent: -3.1 },
+                    { name: 'Kai Johnson', shares: 5, value: 825, change: 95, changePercent: 13.0 }
+                ]
+            },
+            {
+                email: 'premium@kpop.com',
+                username: 'PremiumUser',
+                password: 'premium123',
+                balance: 50000,
+                portfolio: [
+                    { name: 'Luna Kim', shares: 25, value: 3125, change: 200, changePercent: 6.8 },
+                    { name: 'Emma Wilson', shares: 18, value: 2340, change: 156, changePercent: 7.1 },
+                    { name: 'Alex Park', shares: 15, value: 1470, change: -85, changePercent: -5.5 }
+                ]
+            }
+        ];
+        
+        const traineeData = {
+            'Luna Kim': {
+                name: 'Luna Kim',
+                company: 'StarLight Entertainment',
+                age: 19,
+                nationality: 'Korean-American',
+                position: 'Main Dancer, Lead Vocalist',
+                currentValue: 1250,
+                skills: { vocal: 85, dance: 92, rap: 78, visual: 88 },
+                biography: 'Luna Kim discovered her passion for performing at age 7 when she saw Girls\' Generation perform on TV. Born in Los Angeles to Korean immigrant parents, she spent her childhood shuttling between dance studios and vocal lessons.',
+                castingStory: 'Luna was scouted at a local Korean cultural festival in LA when she was 15. A StarLight Entertainment talent scout noticed her natural stage presence during a traditional dance performance. After three rounds of auditions via video call, she moved to Seoul in 2020.',
+                trainingHistory: [
+                    { date: '2020-03', event: 'Joined StarLight Entertainment as trainee' },
+                    { date: '2020-08', event: 'First monthly evaluation - ranked 3rd in dance' },
+                    { date: '2021-02', event: 'Selected for pre-debut team "Stellar Girls"' },
+                    { date: '2021-09', event: 'Participated in company showcase, gained 50K followers' },
+                    { date: '2022-05', event: 'Featured in senior group\'s music video' },
+                    { date: '2023-01', event: 'Became dance mentor for junior trainees' }
+                ],
+                funFacts: [
+                    '🎮 Addicted to mobile rhythm games - holds top scores in 3 different apps',
+                    '🍕 Can eat pizza for every meal and has tried 47 different pizza places in Seoul',
+                    '🐱 Has 3 cats named after her favorite K-pop idols: Taeyeon, IU, and Chungha',
+                    '📚 Fluent in Korean, English, and learning Japanese for potential Japanese debut',
+                    '🎨 Creates her own choreography in her free time and posts covers on TikTok'
+                ],
+                recentNews: [
+                    'Spotted at SM Entertainment building - collaboration rumors?',
+                    'Her dance cover of NewJeans "Get Up" hit 2M views in 24 hours',
+                    'Fans noticed she\'s been practicing late nights - comeback preparation?'
+                ]
+            },
+            'Alex Park': {
+                name: 'Alex Park',
+                company: 'Dream Factory',
+                age: 21,
+                nationality: 'Korean',
+                position: 'Main Rapper, Sub Vocalist',
+                currentValue: 980,
+                skills: { vocal: 78, dance: 88, rap: 95, visual: 82 },
+                biography: 'Born and raised in Busan, Alex Park grew up in a musical family. His father was a jazz musician and his mother taught piano. He started writing rap lyrics in middle school as a way to express his thoughts about social issues.',
+                castingStory: 'Alex auditioned for Dream Factory after his underground rap battle videos went viral on YouTube. His raw talent and authentic storytelling caught the attention of the company\'s A&R team. He was the only trainee accepted from over 3,000 applicants in 2019.',
+                trainingHistory: [
+                    { date: '2019-06', event: 'Joined Dream Factory after viral audition video' },
+                    { date: '2019-12', event: 'Won company\'s first rap battle competition' },
+                    { date: '2020-07', event: 'Collaborated with senior artist on mixtape' },
+                    { date: '2021-03', event: 'Selected as leader of pre-debut team "Urban Kings"' },
+                    { date: '2022-01', event: 'Solo performance at company concert sold out in 3 minutes' },
+                    { date: '2023-06', event: 'Mentored contestants on survival show "Rap Kingdom"' }
+                ],
+                funFacts: [
+                    '🎤 Writes all his own lyrics and has over 200 unreleased songs',
+                    '🏀 Former high school basketball team captain - still plays pickup games',
+                    '📖 Philosophy major before becoming trainee - incorporates deep themes in music',
+                    '🍜 Ramen connoisseur who reviews different brands on his personal Instagram',
+                    '🎧 Produces beats using vintage equipment he collects from flea markets'
+                ],
+                recentNews: [
+                    'His freestyle at underground venue leaked online - fans going crazy',
+                    'Rumored to be working on solo mixtape with famous producer',
+                    'Seen at Hongdae studios with mysterious collaborators'
+                ]
+            },
+            'Mia Chen': {
+                name: 'Mia Chen',
+                company: 'Harmony Music',
+                age: 18,
+                nationality: 'Chinese-Canadian',
+                position: 'Main Vocalist, Visual',
+                currentValue: 1450,
+                skills: { vocal: 94, dance: 81, rap: 72, visual: 96 },
+                biography: 'Mia Chen moved from Vancouver to Seoul at 16 to pursue her K-pop dreams. Coming from a family of classical musicians, she has perfect pitch and can play 5 instruments. Her ethereal voice and stunning visuals quickly made her a trainee favorite.',
+                castingStory: 'Mia was discovered through a global online audition during the pandemic. Her cover of IU\'s "Through the Night" sung in Korean, English, and Mandarin impressed judges so much that they flew her to Seoul immediately after borders reopened.',
+                trainingHistory: [
+                    { date: '2021-01', event: 'Joined Harmony Music via global online audition' },
+                    { date: '2021-04', event: 'First live performance - company showcase' },
+                    { date: '2021-10', event: 'Selected as center for pre-debut group "Celestial"' },
+                    { date: '2022-03', event: 'OST recording for popular K-drama' },
+                    { date: '2022-11', event: 'Performed at MAMA Awards as backup vocalist' },
+                    { date: '2023-08', event: 'Featured in fashion magazine as "Rising Star to Watch"' }
+                ],
+                funFacts: [
+                    '🎹 Can play piano, violin, guitar, flute, and gayageum (traditional Korean instrument)',
+                    '🌸 Speaks 4 languages fluently: English, Mandarin, Korean, and French',
+                    '📸 Amateur photographer who documents trainee life for future documentary',
+                    '🧘 Practices meditation and yoga every morning at 5 AM',
+                    '🎭 Acted in school plays and wants to try acting after debut'
+                ],
+                recentNews: [
+                    'Spotted at luxury brand event - potential endorsement deal?',
+                    'Her vocal coach posted about "once in a generation talent"',
+                    'Fans noticed new styling - debut concept photos coming soon?'
+                ]
+            }
+        };
+        
+        let currentUser = null;
+        let selectedAITrainee = null;
+        let currentTradeType = 'buy';
+        
+        function quickLogin() {
+            document.getElementById('email').value = 'demo@kpoptrainee.com';
+            document.getElementById('password').value = 'demo123';
+            login();
+        }
+        
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            const user = demoAccounts.find(account => 
+                account.email === email && account.password === password
+            );
+            
+            if (user) {
+                currentUser = user;
+                document.getElementById('loginScreen').classList.remove('active');
+                document.getElementById('dashboardScreen').classList.add('active');
+                
+                // Update user info
+                document.getElementById('username').textContent = user.username;
+                document.getElementById('balance').textContent = user.balance.toLocaleString();
+                document.getElementById('leaderboardUser').textContent = user.username;
+                
+                // Update portfolio and trainees
+                updatePortfolio();
+                updateTraineesList();
+                
+                alert(`Welcome back, ${user.username}! 🎉`);
+            } else {
+                alert('Invalid credentials. Try:\ndemo@kpoptrainee.com / demo123');
+            }
+        }
+        
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').classList.add('active');
+            document.getElementById('dashboardScreen').classList.remove('active');
+            showScreen('homeScreen');
+            alert('You have been logged out successfully');
+        }
+        
+        function showScreen(screenId) {
+            // Hide all screens within dashboard
+            const screens = document.querySelectorAll('#dashboardScreen .screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        function updatePortfolio() {
+            if (!currentUser) return;
+            
+            const totalValue = currentUser.portfolio.reduce((sum, holding) => sum + holding.value, 0);
+            document.getElementById('totalValue').textContent = totalValue.toLocaleString();
+            document.getElementById('holdingsCount').textContent = currentUser.portfolio.length;
+            document.getElementById('availableBalance').textContent = currentUser.balance.toLocaleString();
+            
+            const holdingsContainer = document.getElementById('holdings');
+            holdingsContainer.innerHTML = '';
+            
+            currentUser.portfolio.forEach(holding => {
+                const holdingDiv = document.createElement('div');
+                holdingDiv.className = 'holding-card';
+                holdingDiv.onclick = () => showTraineeDetail(holding.name);
+                holdingDiv.innerHTML = `
+                    <div class="holding-name">${holding.name}</div>
+                    <div style="color: #7F8C8D; margin-bottom: 5px;">${holding.shares}% ownership</div>
+                    <div class="holding-value">Value: $${holding.value.toLocaleString()}</div>
+                    <div class="${holding.change >= 0 ? 'positive' : 'negative'}" style="font-weight: 500;">
+                        ${holding.change >= 0 ? '+' : ''}$${holding.change} (${holding.changePercent}%)
+                    </div>
+                `;
+                holdingsContainer.appendChild(holdingDiv);
+            });
+        }
+        
+        function updateTraineesList() {
+            const traineesContainer = document.getElementById('traineesList');
+            traineesContainer.innerHTML = '';
+            
+            Object.values(traineeData).forEach(trainee => {
+                const traineeDiv = document.createElement('div');
+                traineeDiv.className = 'holding-card';
+                traineeDiv.onclick = () => showTraineeDetail(trainee.name);
+                traineeDiv.innerHTML = `
+                    <div class="holding-name">${trainee.name}</div>
+                    <div style="color: #7F8C8D; margin-bottom: 5px;">${trainee.company} • ${trainee.age} years old</div>
+                    <div class="holding-value">Current Value: $${trainee.currentValue}</div>
+                    <div style="margin: 10px 0; font-size: 12px; color: #34495E;">
+                        Vocal: ${trainee.skills.vocal}/100 | Dance: ${trainee.skills.dance}/100 | Rap: ${trainee.skills.rap}/100
+                    </div>
+                    <div class="action-buttons">
+                        <button class="button green" onclick="event.stopPropagation(); investInTrainee('${trainee.name}')">💰 Invest Now</button>
+                        <button class="button purple" onclick="event.stopPropagation(); showTraineeDetail('${trainee.name}')">📋 View Details</button>
+                    </div>
+                `;
+                traineesContainer.appendChild(traineeDiv);
+            });
+        }
+        
+        function showTraineeDetail(traineeName) {
+            const trainee = traineeData[traineeName];
+            if (!trainee) return;
+            
+            const detailContainer = document.getElementById('traineeDetailContent');
+            detailContainer.innerHTML = `
+                <div class="trainee-photo">🎤</div>
+                <h2 class="app-title">${trainee.name}</h2>
+                <p class="subtitle">${trainee.position} • ${trainee.company}</p>
+                
+                <div class="detail-section">
+                    <div class="detail-title">📊 Skills & Stats</div>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">Vocal</div>
+                            <div class="skill-value">${trainee.skills.vocal}/100</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Dance</div>
+                            <div class="skill-value">${trainee.skills.dance}/100</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Rap</div>
+                            <div class="skill-value">${trainee.skills.rap}/100</div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Visual</div>
+                            <div class="skill-value">${trainee.skills.visual}/100</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <div class="detail-title">📖 Biography</div>
+                    <div class="detail-text">${trainee.biography}</div>
+                </div>
+                
+                <div class="detail-section">
+                    <div class="detail-title">🎭 How They Got Cast</div>
+                    <div class="detail-text">${trainee.castingStory}</div>
+                </div>
+                
+                <div class="detail-section">
+                    <div class="detail-title">📅 Training History</div>
+                    ${trainee.trainingHistory.map(item => `
+                        <div class="timeline-item">
+                            <div class="timeline-date">${item.date}</div>
+                            <div class="timeline-event">${item.event}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="detail-section">
+                    <div class="detail-title">🎉 Fun Facts</div>
+                    ${trainee.funFacts.map(fact => `
+                        <div class="detail-text">${fact}</div>
+                    `).join('')}
+                </div>
+                
+                <div class="detail-section">
+                    <div class="detail-title">📰 Recent News</div>
+                    ${trainee.recentNews.map(news => `
+                        <div class="detail-text">• ${news}</div>
+                    `).join('')}
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="button green" onclick="investInTrainee('${trainee.name}')">💰 Invest $500</button>
+                    <button class="button purple" onclick="startAIChat('${trainee.name}')">💬 Chat with AI</button>
+                </div>
+            `;
+            
+            showScreen('traineeDetailScreen');
+        }
+        
+        function investInTrainee(traineeName) {
+            alert(`🎉 Investment Successful!\n\nYou invested $500 in ${traineeName}!\n\n• Transaction processed\n• Portfolio updated\n• You now own shares in ${traineeName}`);
+        }
+        
+        function showTradeModal(type) {
+            currentTradeType = type;
+            const modal = document.getElementById('tradeModal');
+            const title = document.getElementById('tradeModalTitle');
+            const confirmBtn = document.getElementById('confirmTradeBtn');
+            
+            title.textContent = type === 'buy' ? '💰 Buy Shares' : '💸 Sell Shares';
+            confirmBtn.textContent = type === 'buy' ? 'Buy Shares' : 'Sell Shares';
+            confirmBtn.className = type === 'buy' ? 'button green' : 'button red';
+            
+            // Populate trainee dropdown
+            const select = document.getElementById('tradeTraineeSelect');
+            select.innerHTML = '<option value="">Choose a trainee...</option>';
+            
+            if (type === 'buy') {
+                // Show all available trainees for buying
+                Object.values(traineeData).forEach(trainee => {
+                    const option = document.createElement('option');
+                    option.value = trainee.name;
+                    option.textContent = `${trainee.name} - $${trainee.currentValue}`;
+                    select.appendChild(option);
+                });
+            } else {
+                // Show only owned trainees for selling
+                if (currentUser && currentUser.portfolio) {
+                    currentUser.portfolio.forEach(holding => {
+                        const option = document.createElement('option');
+                        option.value = holding.name;
+                        option.textContent = `${holding.name} - ${holding.shares} shares owned`;
+                        select.appendChild(option);
+                    });
+                }
+            }
+            
+            // Add event listeners for preview
+            select.addEventListener('change', updateTradePreview);
+            document.getElementById('tradeQuantity').addEventListener('input', updateTradePreview);
+            
+            modal.classList.add('active');
+        }
+        
+        function updateTradePreview() {
+            const traineeSelect = document.getElementById('tradeTraineeSelect');
+            const quantityInput = document.getElementById('tradeQuantity');
+            const preview = document.getElementById('tradePreview');
+            const previewText = document.getElementById('tradePreviewText');
+            
+            const selectedTrainee = traineeSelect.value;
+            const quantity = parseInt(quantityInput.value) || 0;
+            
+            if (selectedTrainee && quantity > 0) {
+                const trainee = traineeData[selectedTrainee];
+                const totalCost = trainee ? trainee.currentValue * quantity : 0;
+                
+                previewText.innerHTML = `
+                    <div>Trainee: ${selectedTrainee}</div>
+                    <div>Quantity: ${quantity} shares</div>
+                    <div>Price per share: $${trainee ? trainee.currentValue : 0}</div>
+                    <div style="font-weight: bold; color: ${currentTradeType === 'buy' ? '#E74C3C' : '#27AE60'};">
+                        Total ${currentTradeType === 'buy' ? 'Cost' : 'Revenue'}: $${totalCost.toLocaleString()}
+                    </div>
+                `;
+                preview.style.display = 'block';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+        
+        function confirmTrade() {
+            const traineeSelect = document.getElementById('tradeTraineeSelect');
+            const quantityInput = document.getElementById('tradeQuantity');
+            
+            const selectedTrainee = traineeSelect.value;
+            const quantity = parseInt(quantityInput.value) || 0;
+            
+            if (!selectedTrainee || quantity <= 0) {
+                alert('Please select a trainee and enter a valid quantity.');
+                return;
+            }
+            
+            const trainee = traineeData[selectedTrainee];
+            const totalAmount = trainee.currentValue * quantity;
+            const action = currentTradeType === 'buy' ? 'purchased' : 'sold';
+            const emoji = currentTradeType === 'buy' ? '💰' : '💸';
+            
+            alert(`${emoji} Trade Executed!\n\nYou ${action} ${quantity} shares of ${selectedTrainee}\n\nTotal: $${totalAmount.toLocaleString()}\n\n• Market order filled\n• Portfolio updated\n• Balance adjusted`);
+            
+            closeModal('tradeModal');
+        }
+        
+        function showAIChatModal() {
+            const modal = document.getElementById('aiChatModal');
+            const optionsContainer = document.getElementById('aiTraineeOptions');
+            
+            optionsContainer.innerHTML = '';
+            selectedAITrainee = null;
+            
+            Object.values(traineeData).forEach(trainee => {
+                const option = document.createElement('div');
+                option.className = 'trainee-option';
+                option.onclick = () => selectAITrainee(trainee.name, option);
+                option.innerHTML = `
+                    <div style="font-weight: bold; margin-bottom: 5px;">${trainee.name}</div>
+                    <div style="font-size: 12px; color: #7F8C8D;">${trainee.company} • ${trainee.position}</div>
+                    <div style="font-size: 12px; margin-top: 5px;">AI Personality: ${getAIPersonality(trainee.name)}</div>
+                `;
+                optionsContainer.appendChild(option);
+            });
+            
+            document.getElementById('startChatBtn').disabled = true;
+            modal.classList.add('active');
+        }
+        
+        function selectAITrainee(traineeName, element) {
+            // Remove previous selection
+            document.querySelectorAll('.trainee-option').forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
+            element.classList.add('selected');
+            selectedAITrainee = traineeName;
+            
+            // Enable start chat button
+            document.getElementById('startChatBtn').disabled = false;
+        }
+        
+        function getAIPersonality(traineeName) {
+            const personalities = {
+                'Luna Kim': 'Energetic, dance-focused, pizza-loving',
+                'Alex Park': 'Thoughtful, philosophical, street-smart',
+                'Mia Chen': 'Elegant, multilingual, artistic'
+            };
+            return personalities[traineeName] || 'Unique and engaging';
+        }
+        
+        function startSelectedAIChat() {
+            if (!selectedAITrainee) {
+                alert('Please select a trainee first.');
+                return;
+            }
+            
+            alert(`💬 AI Chat Starting...\n\nConnecting to ${selectedAITrainee} AI Persona\n\nPersonality: ${getAIPersonality(selectedAITrainee)}\n\n• AI loaded and ready\n• Chat history retrieved\n• Personality traits active\n\n(This would open the AI chat interface in the full app)`);
+            
+            closeModal('aiChatModal');
+        }
+        
+        function showGiftModal() {
+            const modal = document.getElementById('giftModal');
+            const select = document.getElementById('giftTraineeSelect');
+            
+            select.innerHTML = '<option value="">Choose a trainee...</option>';
+            Object.values(traineeData).forEach(trainee => {
+                const option = document.createElement('option');
+                option.value = trainee.name;
+                option.textContent = trainee.name;
+                select.appendChild(option);
+            });
+            
+            modal.classList.add('active');
+        }
+        
+        function confirmGift() {
+            const traineeSelect = document.getElementById('giftTraineeSelect');
+            const giftSelect = document.getElementById('giftTypeSelect');
+            
+            const selectedTrainee = traineeSelect.value;
+            const selectedGift = giftSelect.options[giftSelect.selectedIndex].text;
+            
+            if (!selectedTrainee) {
+                alert('Please select a trainee first.');
+                return;
+            }
+            
+            alert(`🎁 Gift Sent!\n\nYou sent ${selectedGift} to ${selectedTrainee}!\n\n• Gift delivered successfully\n• Trainee morale increased\n• Fan relationship improved\n• Thank you message incoming`);
+            
+            closeModal('giftModal');
+        }
+        
+        function showFanClubModal() {
+            const modal = document.getElementById('fanClubModal');
+            const select = document.getElementById('fanClubTraineeSelect');
+            
+            select.innerHTML = '<option value="">Choose a trainee...</option>';
+            Object.values(traineeData).forEach(trainee => {
+                const option = document.createElement('option');
+                option.value = trainee.name;
+                option.textContent = `${trainee.name} Fan Club`;
+                select.appendChild(option);
+            });
+            
+            modal.classList.add('active');
+        }
+        
+        function confirmFanClub() {
+            const traineeSelect = document.getElementById('fanClubTraineeSelect');
+            const selectedTrainee = traineeSelect.value;
+            
+            if (!selectedTrainee) {
+                alert('Please select a trainee first.');
+                return;
+            }
+            
+            alert(`👥 Welcome to ${selectedTrainee}'s Fan Club!\n\nMembership activated!\n\n• Exclusive content unlocked\n• Direct messaging enabled\n• Event access granted\n• Monthly subscription: $20\n• Welcome package incoming`);
+            
+            closeModal('fanClubModal');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
